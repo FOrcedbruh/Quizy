@@ -30,7 +30,7 @@ class authController {
             const candidate = await User.findOne({email});
     
             if (candidate) {
-                return res.json({
+                return res.status(400).json({
                     message: `Пользователь с почтой ${email} уже существует`
                 })
             }
@@ -56,7 +56,7 @@ class authController {
             });
         } catch (error) {   
             console.log(error);
-            return res.json({
+            return res.status(400).json({
                 message: 'Ошибка на сервере'
             })
         }
@@ -69,7 +69,7 @@ class authController {
             const user = await User.findOne({email});
 
             if (!user) {
-                return res.json({
+                return res.status(400).json({
                     message: `Пользователя с почтой ${email} не существует`
                 })
             }
@@ -77,7 +77,7 @@ class authController {
             const validPassword = bcrypt.compareSync(password, user.password);
 
             if (!validPassword) {
-                return res.json({
+                return res.status(400).json({
                     message: `Пароль ${password} неверный`
                 })
             }
@@ -92,7 +92,7 @@ class authController {
             })
         } catch (error) {
             console.log(error);
-            return res.json({
+            return res.status(400).json({
                 message: 'Ошибка на сервере'
             })
         }
@@ -116,7 +116,7 @@ class authController {
             });
         } catch (e) {
             console.log(e);
-            return res.json({
+            return res.status(400).json({
                 message: 'Ошибка на сервере'
             })
         }
