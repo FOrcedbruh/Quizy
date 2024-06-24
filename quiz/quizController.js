@@ -7,7 +7,7 @@ class quizController {
 
     async createQuiz(req, res) {
         try {
-            const { mainColor, secondaryColor, category, title, body } = req.body;
+            const { mainColor, listColor, textColor, categoryName, title, body } = req.body;
             const  userId  = req.user._id;
 
             const user = await User.findById(userId);
@@ -20,8 +20,9 @@ class quizController {
 
             const quiz =  new Quiz({
                 mainColor,
-                secondaryColor,
-                category,
+                listColor,
+                textColor,
+                categoryName,
                 title,
                 body
             });

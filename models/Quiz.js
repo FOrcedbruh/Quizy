@@ -22,15 +22,17 @@ const StepSchema = new Schema({
 
 
 const QuizSchema = new Schema({
-    bgColor: {
+    mainColor: {
         type: String,
-        required: false,
-        default: '#fff'
+        required: true,
     },
     textColor: {
         type: String,
-        required: false,
-        default: '#000'
+        required: true,
+    },
+    listColor: {
+        type: String,
+        required: true,
     },
     users: [
         {
@@ -39,7 +41,7 @@ const QuizSchema = new Schema({
             default: []
         }
     ],
-    category: {
+    categoryName: {
         type: String,
         required: true
     },
