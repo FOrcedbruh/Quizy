@@ -42,7 +42,7 @@ class quizController {
     }
     async getQuiz(req, res) {
         try {
-            const { quizId } = reqparams;
+            const { quizId } = req.params;
 
             const quiz = await Quiz.findById(quizId);
 
