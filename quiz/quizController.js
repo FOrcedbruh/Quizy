@@ -83,6 +83,36 @@ class quizController {
 
         
     }
+    async deleteQuiz(req, res) {
+        try {
+            const { quizId, userId, index } = req.body;
+
+            const quiz = await Quiz.findByIdAndDelete(quizId);
+
+            const user = await User.findById(userId);
+
+            if (!user) {
+                res.status(400).json({
+                    message: 'User not found :('
+                })
+            }
+
+            await user.tests.splice(index, 1);
+
+            await user.save();
+
+            res.status(200).json({
+                message: `${quiz.title} successfully deleted ;)`
+            });
+
+        } catch (error) {
+            console.log(error);
+            res.status(400).json({
+                message: 'Server error'
+            })
+        }
+        
+    }
     
 }
 
