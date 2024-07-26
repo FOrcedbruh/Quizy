@@ -7,6 +7,7 @@ authRouter.post('/registration', authController.registartion);
 authRouter.post('/login', authController.login);
 authRouter.post('/logout', authController.logout);
 authRouter.post('/delete/:userId', protectedRoute, authController.delete);
+authRouter.post('/setAvatar', protectedRoute, authController.updateAvatar);
 
 
 module.exports = authRouter;

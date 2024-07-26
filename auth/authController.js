@@ -31,7 +31,7 @@ class authController {
     
             if (candidate) {
                 return res.status(400).json({
-                    message: `Пользователь с почтой ${email} уже существует`
+                    message: `User with email ${email} already exists`
                 })
             }
     
@@ -57,7 +57,7 @@ class authController {
         } catch (error) {   
             console.log(error);
             return res.status(400).json({
-                message: 'Ошибка на сервере'
+                message: 'Server error'
             })
         }
        
@@ -70,7 +70,7 @@ class authController {
 
             if (!user) {
                 return res.status(400).json({
-                    message: `Пользователя с почтой ${email} не существует`
+                    message: `User with email ${email} doesn't exist`
                 })
             }
 
@@ -78,7 +78,7 @@ class authController {
 
             if (!validPassword) {
                 return res.status(400).json({
-                    message: `Пароль ${password} неверный`
+                    message: `Password incorrect`
                 })
             }
 
@@ -93,7 +93,7 @@ class authController {
         } catch (error) {
             console.log(error);
             return res.status(400).json({
-                message: 'Ошибка на сервере'
+                message: 'Server error'
             })
         }
     }
@@ -102,7 +102,7 @@ class authController {
             maxAge: 0
         });
         return res.status(200).json({
-            message: 'Вы вышли с аккаунта'
+            message: 'You logout ))'
         })
     }
     async delete(req, res) {
@@ -112,12 +112,28 @@ class authController {
             await User.findByIdAndDelete(userId);
 
             return res.status(200).json({
-                message: 'Аккаунт успешно удален'
+                message: 'Account successfully deleted ('
             });
         } catch (e) {
             console.log(e);
             return res.status(400).json({
-                message: 'Ошибка на сервере'
+                message: 'Server error'
+            })
+        }
+    }
+    async updateAvatar(req, res) {
+        try {
+            const { avatar, userId } = req.body;
+
+            await User.findByIdAndUpdate(userId, { avatar: avatar });
+
+            res.status(200).json({
+                message: 'Avatar successfully updated'
+            })
+        } catch (error) {
+            console.log(error);
+            return res.status(400).json({
+                message: "Server error"
             })
         }
     }
