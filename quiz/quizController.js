@@ -2,6 +2,21 @@ const Quiz = require("../models/Quiz");
 const User = require("../models/User");
 
 
+const shuffle = (array) => {
+    let m = array.length, t, i;
+
+    while(m) {
+        i = Math.floor(Math.random() * m--);
+
+
+        t = array[m];
+        array[m] = array[i];
+        array[i] = t;
+    }
+
+   return array;
+}
+
 class quizController {
 
 
@@ -113,7 +128,22 @@ class quizController {
         }
         
     }
-    
+    async getIdeas(req, res) {
+        try {
+            const ideas = await Quiz.find();
+
+            const randomIdeas = shuffle(ideas);
+            
+            
+
+            res.status(200).json(randomIdeas);
+        } catch (error) {
+            console.log(error);
+            return res.status(400).json({
+                message: 'Server error'
+            });
+        }
+    }
 }
 
 

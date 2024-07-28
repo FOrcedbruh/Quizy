@@ -2,6 +2,7 @@ const User = require('./../models/User');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const secret = require('./../utils/jwtSecret');
+const path = require('path');
 
 const generate_jwt = (userId, res) => {
     const payload = {
@@ -123,9 +124,14 @@ class authController {
     }
     async updateAvatar(req, res) {
         try {
-            const { avatar, userId } = req.body;
+            const { userId } = req.body;
+            const file = req.file;
 
-            await User.findByIdAndUpdate(userId, { avatar: avatar });
+            const url = `http:localhost:8080/auth/getAvatar/${file.filename}`;
+
+            const user = await User.findByIdAndUpdate(userId, { avatar: url});
+
+            await user.save();
 
             res.status(200).json({
                 message: 'Avatar successfully updated'
@@ -136,6 +142,13 @@ class authController {
                 message: "Server error"
             })
         }
+    }
+    async getAvatar(req, res) {
+        const avatarName = req.params.avatarName;
+
+        const avatarPath = path.join(__dirname, "../avatars/", avatarName);
+
+        res.sendFile(avatarPath);
     }
 }
 

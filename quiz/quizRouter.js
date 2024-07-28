@@ -7,6 +7,7 @@ const protectedRoute = require('./../middleware/protectedRoute');
 quizRouter.post('/create', protectedRoute,  quizController.createQuiz);
 quizRouter.post('/get/:quizId', quizController.getQuiz);
 quizRouter.post('/allQuizzes', protectedRoute, quizController.getQuizzes);
-quizRouter.post('/delete', protectedRoute, quizController.deleteQuiz)
+quizRouter.post('/delete', protectedRoute, quizController.deleteQuiz);
+quizRouter.get('/ideas', quizController.getIdeas);
 
 module.exports = quizRouter;

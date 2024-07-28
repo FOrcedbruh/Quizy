@@ -10,6 +10,7 @@ const quizRouter = require('./quiz/quizRouter');
 
 dotenv.config();
 
+
 const origin = 'http://localhost:5173'
 
 
@@ -17,7 +18,7 @@ const app = express();
 
 
 app.use(cors({
-    origin: origin,
+    origin,
     credentials: true
 }));
 app.use(express.urlencoded({limit: '50mb'}));
