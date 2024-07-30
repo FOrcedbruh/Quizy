@@ -11,7 +11,7 @@ const quizRouter = require('./quiz/quizRouter');
 dotenv.config();
 
 
-const origin = 'http://localhost:5173'
+const origin = process.env.CLIENT_ORIGIN;
 
 
 const app = express();

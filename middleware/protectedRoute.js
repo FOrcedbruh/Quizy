@@ -1,7 +1,6 @@
 const jwt  = require('jsonwebtoken');
 const secret = require('./../utils/jwtSecret');
 const User = require('../models/User');
-const { model } = require('mongoose');
 
 
 const protectedRoute = async ( req, res, next)  => {
